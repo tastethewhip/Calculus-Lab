@@ -1,388 +1,347 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Calculus Lab — Dark Mode</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/nerdamer.core.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Algebra.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Calculus.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Extra.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Solve.js"></script>
-<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root { color-scheme: dark; }
-  html, body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: #020617; }
-  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 8px; border: 2px solid #020617; }
-  ::-webkit-scrollbar-thumb:hover { background: #475569; }
-  * { scrollbar-color: #334155 #020617; scrollbar-width: thin; }
-  .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-  .grid-bg { background-image: radial-gradient(rgba(148,163,184,0.08) 1px, transparent 1px); background-size: 24px 24px; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculus Lab — Dark</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nerdamer/1.1.13/nerdamer.core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nerdamer/1.1.13/Algebra.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nerdamer/1.1.13/Calculus.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nerdamer/1.1.13/Solve.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nerdamer/1.1.13/Extra.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    html, body { background:#020617 }
+    .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px) }
+    ::-webkit-scrollbar { width:8px; height:8px }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:8px }
+    ::-webkit-scrollbar-track { background:#020617 }
+    .katex { color: #e2e8f0 !important }
+    input, select { color-scheme: dark }
+  </style>
 </head>
-<body class="bg-[#020617] min-h-screen text-slate-100 selection:bg-violet-500/30 selection:text-violet-200">
-  <div class="pointer-events-none fixed inset-0">
-    <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-violet-600/20 blur-[120px]"></div>
-    <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-indigo-600/10 blur-[140px]"></div>
-  </div>
-
-  <header class="sticky top-0 z-40 border-b border-slate-800/80 glass">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 shadow-lg shadow-violet-900/30 flex items-center justify-center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-white"><path d="M4 13.5C4 13.5 6.5 10 12 10C17.5 10 20 13.5 20 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10.5C4 10.5 6.5 14 12 14C17.5 14 20 10.5 20 10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/></svg>
-        </div>
-        <div>
-          <h1 class="text-slate-200 font-semibold tracking-tight leading-4">Calculus Lab</h1>
-          <p class="text-[11px] text-slate-500 -mt-0.5">Dark • Symbolic • Graphing</p>
-        </div>
-      <div class="hidden sm:flex items-center gap-2 text-[11px] text-slate-400">
-        <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800">nerdamer</span>
-        <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800">KaTeX</span>
-        <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800">Plotly</span>
-      </div>
+<body class="bg-[#020617] text-slate-200 antialiased selection:bg-violet-500/30 selection:text-violet-200">
+  <div class="relative min-h-screen overflow-hidden">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-violet-600/20 blur-[120px]"></div>
+      <div class="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]"></div>
+      <div class="absolute -bottom-32 right-1/4 h-80 w-80 rounded-full bg-indigo-600/15 blur-[100px]"></div>
     </div>
-  </header>
 
-  <main class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
-      <!-- Controls -->
-      <section class="xl:col-span-2">
-        <div class="rounded-[28px] border border-slate-700/60 glass shadow-2xl shadow-black/40 overflow-hidden">
-          <div class="px-6 pt-6 pb-4 border-b border-slate-800/80">
-            <h2 class="text-lg font-semibold text-slate-200">Function</h2>
-            <p class="text-sm text-slate-400 mt-0.5">Enter f(x), choose operation, and compute.</p>
+    <header class="relative z-10 border-b border-slate-800/60">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 py-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 shadow-lg shadow-violet-900/30 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 19l6-6 4 4 6-10"/><circle cx="4" cy="19" r="1.5" fill="white"/></svg>
           </div>
-          <div class="p-6 space-y-5">
-            <div>
-              <label class="text-xs uppercase tracking-wider text-slate-400 mb-2 block">f(x)</label>
-              <div class="relative">
-                <input id="expr" class="w-full bg-[#0b1220] border border-[#334155] text-[#e2e8f0] placeholder-slate-500 rounded-2xl px-4 py-3.5 pr-12 outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 mono text-[15px] transition" value="x^3 + 2*x^2 - 5*x + 3" spellcheck="false"/>
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 text-xs mono">nerdamer</span>
-              </div>
-              <div class="mt-2 flex flex-wrap gap-1.5">
-                <button data-ex="x^3 + 2*x^2 - 5*x + 3" class="ex px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700/70">poly</button>
-                <button data-ex="sin(x)^2 + cos(x)" class="ex px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700/70">trig</button>
-                <button data-ex="exp(-x^2)" class="ex px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700/70">gaussian</button>
-                <button data-ex="1/x" class="ex px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700/70">1/x</button>
-                <button data-ex="log(x)" class="ex px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700/70">ln(x)</button>
-              </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Calculus Lab</h1>
+            <p class="text-xs text-slate-400 -mt-0.5">Dark • Stable • Symbolic + Numeric</p>
+          </div>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800 text-slate-300">nerdamer</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800 text-slate-300">KaTeX</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800 text-slate-300">Plotly</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-8 grid lg:grid-cols-5 gap-6">
+      <!-- Controls -->
+      <section class="lg:col-span-2">
+        <div class="rounded-2xl bg-slate-900/70 glass border border-slate-800 shadow-2xl shadow-black/30">
+          <div class="p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-5">
+              <h2 class="text-sm font-semibold uppercase tracking-widest text-slate-400">Controls</h2>
+              <div class="h-1 w-20 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 opacity-70"></div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-4">
               <div>
-                <label class="text-xs uppercase tracking-wider text-slate-400 mb-2 block">Operation</label>
-                <select id="op" class="w-full bg-[#0b1220] border border-[#334155] text-[#e2e8f0] rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-violet-500/50">
-                  <option value="integrate">Indefinite Integral ∫ f dx</option>
-                  <option value="derivative">Derivative d/dx f</option>
-                  <option value="definite">Definite Integral ∫ₐᵇ f dx</option>
+                <label class="text-xs text-slate-400 mb-1.5 block">Operation</label>
+                <select id="op" class="w-full bg-slate-950/70 border border-slate-800 rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition">
+                  <option value="diff">Derivative d/dv</option>
+                  <option value="integrate" selected>Indefinite Integral ∫</option>
+                  <option value="defint">Definite Integral ∫ₐᵇ</option>
                 </select>
               </div>
-              <div>
-                <label class="text-xs uppercase tracking-wider text-slate-400 mb-2 block">Variable</label>
-                <select id="variable" class="w-full bg-[#0b1220] border border-[#334155] text-[#e2e8f0] rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-violet-500/50">
-                  <option>x</option><option>t</option><option>u</option><option>y</option>
-                </select>
-              </div>
-            </div>
 
-            <div id="bounds" class="hidden">
+              <div>
+                <label class="text-xs text-slate-400 mb-1.5 block">Expression f(v)</label>
+                <input id="expr" value="x^3 + 2*x" spellcheck="false" class="w-full bg-slate-950/70 border border-slate-800 rounded-xl px-4 py-3 font-mono text-[15px] outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition" placeholder="e.g. x^3 + 2*x">
+              </div>
+
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="text-xs uppercase tracking-wider text-slate-400 mb-2 block">Lower a</label>
-                  <input id="a" type="number" step="any" value="0" class="w-full bg-[#0b1220] border border-[#334155] text-[#e2e8f0] rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-500/50 mono"/>
+                  <label class="text-xs text-slate-400 mb-1.5 block">Variable</label>
+                  <input id="variable" value="x" class="w-full bg-slate-950/70 border border-slate-800 rounded-xl px-3.5 py-2.5 font-mono outline-none focus:ring-2 focus:ring-violet-500/40" />
                 </div>
                 <div>
-                  <label class="text-xs uppercase tracking-wider text-slate-400 mb-2 block">Upper b</label>
-                  <input id="b" type="number" step="any" value="2" class="w-full bg-[#0b1220] border border-[#334155] text-[#e2e8f0] rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-500/50 mono"/>
+                  <label class="text-xs text-slate-400 mb-1.5 block">Syntax</label>
+                  <div class="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-400">^ * / + - sin cos tan exp ln sqrt</div>
+                </div>
+              </div>
+
+              <div id="bounds" class="hidden">
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="text-xs text-slate-400 mb-1.5 block">Lower a</label>
+                    <input id="a" value="0" class="w-full bg-slate-950/70 border border-slate-800 rounded-xl px-3.5 py-2.5 font-mono outline-none focus:ring-2 focus:ring-violet-500/40" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-slate-400 mb-1.5 block">Upper b</label>
+                    <input id="b" value="2" class="w-full bg-slate-950/70 border border-slate-800 rounded-xl px-3.5 py-2.5 font-mono outline-none focus:ring-2 focus:ring-violet-500/40" />
+                  </div>
+                </div>
+              </div>
+
+              <div id="error" class="hidden rounded-xl border border-red-900/60 bg-red-950/40 px-3.5 py-2.5 text-sm text-red-300"></div>
+
+              <div class="flex flex-wrap gap-2.5 pt-1">
+                <button id="compute" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 font-medium shadow-lg shadow-violet-950/30 hover:opacity-95 active:opacity-90 transition">Compute</button>
+                <button id="clear" class="px-3.5 py-2.5 rounded-xl bg-slate-800/70 border border-slate-700 hover:bg-slate-800 transition text-sm">Clear</button>
+                <button id="export" class="ml-auto px-3.5 py-2.5 rounded-xl bg-slate-800/70 border border-slate-700 hover:bg-slate-800 transition text-sm">Export PDF</button>
+              </div>
+
+              <div class="pt-3 border-t border-slate-800/70">
+                <p class="text-xs text-slate-400 mb-2">Examples</p>
+                <div class="flex flex-wrap gap-2">
+                  <button data-ex="x^3 + 2*x" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">x³+2x</button>
+                  <button data-ex="sin(x)" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">sin(x)</button>
+                  <button data-ex="exp(x)" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">e^x</button>
+                  <button data-ex="ln(x)" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">ln(x)</button>
+                  <button data-ex="1/x" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">1/x</button>
+                  <button data-ex="x^2 * cos(x)" class="example px-2.5 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 hover:border-violet-500/40 text-xs font-mono">x²cos(x)</button>
                 </div>
               </div>
             </div>
-
-            <div class="flex gap-2.5 pt-2">
-              <button id="btn-calc" class="flex-1 relative overflow-hidden rounded-2xl px-5 py-3.5 font-medium text-white bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 shadow-lg shadow-violet-950/40 transition active:scale-[0.99]">
-                <span class="relative z-10 flex items-center justify-center gap-2">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                  Calculate
-                </span>
-              </button>
-              <button id="btn-clear" class="px-4 py-3.5 rounded-2xl bg-slate-800/70 border border-slate-700 text-slate-300 hover:bg-slate-700/70 transition">Clear</button>
-              <button id="btn-pdf" class="px-4 py-3.5 rounded-2xl bg-slate-800/70 border border-slate-700 text-slate-300 hover:bg-slate-700/70 transition">PDF</button>
-            </div>
-
-            <div id="error" class="hidden mt-3 p-3 rounded-xl bg-red-950/40 border border-red-900/60 text-red-300 text-sm"></div>
-
-            <div class="pt-4 border-t border-slate-800/80">
-              <p class="text-[11px] uppercase tracking-wider text-slate-500 mb-2">Tips</p>
-              <ul class="text-xs text-slate-400 space-y-1.5 leading-relaxed">
-                <li>• Use ^ for powers, * for multiplication: <span class="mono text-slate-300">2*x^3</span></li>
-                <li>• Functions: <span class="mono text-slate-300">sin(x), cos(x), tan(x), exp(x), log(x), sqrt(x)</span></li>
-                <li>• Definite integral uses FTC: compute F = ∫f, then F(b)−F(a)</li>
-              </ul>
-            </div>
           </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl bg-slate-900/40 border border-slate-800/60 p-4 text-xs text-slate-400 leading-relaxed">
+          <span class="text-slate-300 font-medium">Fix applied:</span> uses <code class="text-violet-300">.sub(v,a)</code> not <code class="text-violet-300">.evaluate()</code> to avoid "this.symbol.clone is not a function". Falls back to Simpson integration if symbolic fails.
         </div>
       </section>
 
       <!-- Results -->
-      <section class="xl:col-span-3 space-y-6">
-        <div id="report">
-          <div class="rounded-[28px] border border-slate-700/60 glass shadow-2xl shadow-black/40 overflow-hidden">
-            <div class="px-6 pt-6 pb-4 flex items-center justify-between border-b border-slate-800/80">
-              <div>
-                <h2 class="text-lg font-semibold text-slate-200">Result</h2>
-                <p class="text-sm text-slate-400">Symbolic output rendered with KaTeX</p>
-              </div>
-              <div id="funcRender" class="text-slate-300 text-sm"></div>
+      <section class="lg:col-span-3 space-y-6">
+        <div id="resultCard" class="rounded-2xl bg-slate-900/70 glass border border-slate-800 shadow-2xl shadow-black/30">
+          <div class="p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-sm font-semibold uppercase tracking-widest text-slate-400">Result</h2>
+              <div class="text-[11px] px-2 py-1 rounded-md bg-slate-950/70 border border-slate-800 text-slate-400">Stable Dark Engine</div>
             </div>
-            <div class="p-6">
-              <div class="rounded-2xl bg-[#0b1220]/80 border border-slate-800 p-5 grid-bg">
-                <div id="resultMath" class="text-slate-100 text-xl overflow-x-auto"></div>
-              </div>
-              <div id="steps" class="mt-5"></div>
-            </div>
+            <div id="output" class="min-h-[84px] text-[15px] leading-relaxed"></div>
           </div>
+        </div>
 
-          <div class="rounded-[28px] border border-slate-700/60 glass shadow-2xl shadow-black/40 overflow-hidden mt-6">
-            <div class="px-6 pt-5 pb-3 flex items-center justify-between border-b border-slate-800/80">
-              <h3 class="font-medium text-slate-200">Graph</h3>
-              <span class="text-[11px] text-slate-500">dark • interactive</span>
+        <div class="rounded-2xl bg-slate-900/70 glass border border-slate-800 shadow-2xl shadow-black/30">
+          <div class="p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-sm font-semibold uppercase tracking-widest text-slate-400">Graph</h2>
+              <div class="text-xs text-slate-500">Plotly • interactive</div>
             </div>
-            <div class="p-3 sm:p-5">
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#050b14]">
-                <div id="graph" style="height:380px"></div>
-              </div>
-            </div>
+            <div id="plot" class="w-full h-[340px] rounded-xl overflow-hidden bg-slate-950/40 border border-slate-800/60"></div>
           </div>
         </div>
       </section>
-    </div>
-  </main>
+    </main>
 
-  <footer class="relative border-t border-slate-900/80 py-8 text-center text-xs text-slate-600">
-    Calculus Lab — Dark Edition. Built with nerdamer, KaTeX, Plotly.
-  </footer>
+    <footer class="relative z-10 border-t border-slate-800/60 mt-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 py-6 text-xs text-slate-500 flex items-center justify-between">
+        <span>Calculus Lab • dark theme • v1.3</span>
+        <span class="hidden sm:block">Derivative: nerdamer(diff), Integral: nerdamer(integrate), Definite: F(b)-F(a) via .sub()</span>
+      </div>
+    </footer>
+  </div>
 
 <script>
-const $ = (id) => document.getElementById(id);
-const exprInput = $('expr');
-const opSelect = $('op');
-const varSelect = $('variable');
-const aInput = $('a');
-const bInput = $('b');
-const boundsDiv = $('bounds');
-const resultMath = $('resultMath');
-const funcRender = $('funcRender');
-const stepsDiv = $('steps');
-const errorBox = $('error');
+const $ = id => document.getElementById(id);
+const opSel = $('op'), exprInput = $('expr'), varInput = $('variable');
+const aInput = $('a'), bInput = $('b'), boundsWrap = $('bounds');
+const output = $('output'), errorBox = $('error'), plotDiv = $('plot');
 
-function toLatex(s){
-  try { return nerdamer.convertToLaTeX(s.toString()); }
-  catch(e){ return String(s).replace(/\*/g,''); }
+function hideError(){ errorBox.classList.add('hidden') }
+function showError(m){ errorBox.textContent = m; errorBox.classList.remove('hidden') }
+
+function safeTex(node){
+  try { return node.toTeX ? node.toTeX() : nerdamer(node.toString()).toTeX(); }
+  catch(e){ try { return node.toString(); } catch { return '' } }
 }
-
-function toggleBounds(){
-  boundsDiv.classList.toggle('hidden', opSelect.value !== 'definite');
+function renderMath(tex, display=true){
+  try { return katex.renderToString(tex, {throwOnError:false, displayMode:display, strict:false}); }
+  catch(e){ return `<code class="text-slate-300">${tex}</code>` }
 }
-
-opSelect.addEventListener('change', toggleBounds);
-
-document.querySelectorAll('.ex').forEach(btn=>{
-  btn.addEventListener('click', ()=>{ exprInput.value = btn.dataset.ex; calculate(); });
-});
-
-$('btn-clear').addEventListener('click', ()=>{
-  exprInput.value = 'x^3 + 2*x^2 - 5*x + 3';
-  opSelect.value = 'integrate';
-  varSelect.value = 'x';
-  aInput.value = '0';
-  bInput.value = '2';
-  toggleBounds();
-  calculate();
-});
-
-$('btn-calc').addEventListener('click', calculate);
-$('btn-pdf').addEventListener('click', exportPDF);
-[exprInput, varSelect, aInput, bInput].forEach(el=>{
-  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ calculate(); }});
-});
-
-function calculate(){
-  errorBox.classList.add('hidden');
-  const expr = (exprInput.value || '0').trim();
-  const v = varSelect.value;
-  const op = opSelect.value;
-  const a = aInput.value;
-  const b = bInput.value;
-
+function linspace(a,b,n){ const arr=new Array(n); const step=(b-a)/(n-1); for(let i=0;i<n;i++) arr[i]=a+i*step; return arr }
+function simpson(fn,a,b,n=2000){ if(n%2) n++; const h=(b-a)/n; let s=fn(a)+fn(b); for(let i=1;i<n;i++){ const x=a+i*h; const fx=fn(x); s+= (i%2===0?2:4)* (isFinite(fx)?fx:0)} return s*h/3 }
+function safeBuild(exprStr, v){
   try{
-    const latexExpr = toLatex(expr);
-    try{ katex.render(`f(${v}) = ${latexExpr}`, funcRender, {throwOnError:false}); }catch{}
-
-    let outHTML = '';
-    let stepHTML = '';
-
-    if(op === 'derivative'){
-      const d = nerdamer(`diff(${expr}, ${v})`);
-      const dStr = d.toString();
-      outHTML = katex.renderToString(`\\displaystyle \\frac{d}{d${v}}\\left(${latexExpr}\\right) = ${toLatex(dStr)}`, {throwOnError:false});
-      stepHTML = `
-        <div class="space-y-3">
-          <p class="text-sm text-slate-400">Differentiated with respect to <span class="text-slate-200 mono">${v}</span>.</p>
-          <div class="p-4 rounded-xl bg-[#0b1220] border border-slate-800">
-            <div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">Symbolic</div>
-            <div class="mono text-violet-300 break-all">${dStr}</div>
-          </div>
-        </div>`;
-    }
-    else if(op === 'integrate'){
-      const I = nerdamer(`integrate(${expr}, ${v})`);
-      const iStr = I.toString();
-      outHTML = katex.renderToString(`\\displaystyle \\int ${latexExpr}\\, d${v} = ${toLatex(iStr)} + C`, {throwOnError:false});
-      stepHTML = `
-        <div class="space-y-3">
-          <p class="text-sm text-slate-400">Antiderivative computed.</p>
-          <div class="p-4 rounded-xl bg-[#0b1220] border border-slate-800">
-            <div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">F(${v})</div>
-            <div class="mono text-cyan-300 break-all">${iStr} + C</div>
-          </div>
-        </div>`;
-    }
-    else { // definite - FIXED: integrate then F(b)-F(a)
-      const F = nerdamer(`integrate(${expr}, ${v})`);
-      const Fstr = F.toString();
-      // Use subst for numerical evaluation (more reliable than evaluate)
-      const Fb = nerdamer(`subst(${Fstr}, ${v}, ${b})`);
-      const Fa = nerdamer(`subst(${Fstr}, ${v}, ${a})`);
-      const def = Fb.subtract(Fa);
-      const defStr = def.toString();
-      let defNum;
-      try { defNum = parseFloat(def.evaluate().text('decimals', 10)); }
-      catch{ defNum = Number(defStr); }
-      
-      outHTML = katex.renderToString(`\\displaystyle \\int_{${a}}^{${b}} ${latexExpr}\\, d${v} = ${toLatex(defStr)} \\approx ${isFinite(defNum)? defNum.toFixed(6): ''}`, {throwOnError:false});
-      stepHTML = `
-        <div class="space-y-3">
-          <p class="text-sm text-slate-400">Fundamental Theorem: compute F = ∫ f, then F(b) − F(a).</p>
-          <div class="grid sm:grid-cols-3 gap-3">
-            <div class="p-4 rounded-xl bg-[#0b1220] border border-slate-800">
-              <div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">Antiderivative F(${v})</div>
-              <div class="mono text-slate-200 break-all">${Fstr}</div>
-            </div>
-            <div class="p-4 rounded-xl bg-[#0b1220] border border-slate-800">
-              <div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">F(${b})</div>
-              <div class="mono text-cyan-300 break-all">${Fb.toString()}</div>
-            </div>
-            <div class="p-4 rounded-xl bg-[#0b1220] border border-slate-800">
-              <div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">F(${a})</div>
-              <div class="mono text-cyan-300 break-all">${Fa.toString()}</div>
-            </div>
-          </div>
-        </div>`;
-    }
-
-    resultMath.innerHTML = outHTML;
-    stepsDiv.innerHTML = stepHTML;
-
-    plotFunction(expr, v, op, a, b);
-  }
-  catch(err){
-    console.error(err);
-    errorBox.textContent = 'Error: ' + (err.message || err);
-    errorBox.classList.remove('hidden');
-    resultMath.innerHTML = '<span class="text-red-400">Could not compute. Check syntax.</span>';
-    stepsDiv.innerHTML = '';
-  }
+    const fn = nerdamer(exprStr).buildFunction([v]);
+    return (x)=>{ try{ const y=fn(x); return (typeof y==='number' && isFinite(y))? y : NaN }catch{ return NaN } }
+  }catch{ return ()=>NaN }
 }
 
-function plotFunction(expr, v, op, a, b){
-  try{
-    const fn = nerdamer(expr).buildFunction([v]);
-    let xMin = -8, xMax = 8;
-    if(op==='definite'){
-      const an = parseFloat(a), bn = parseFloat(b);
-      xMin = Math.min(an, bn) - 3;
-      xMax = Math.max(an, bn) + 3;
-      if(!isFinite(xMin) || !isFinite(xMax)){ xMin=-8; xMax=8; }
-    }
-    const N = 700;
-    const xs=[], ys=[];
-    for(let i=0;i<=N;i++){
-      const x = xMin + (xMax - xMin)*i/N;
-      let y;
-      try{ y = fn(x); if(!isFinite(y)) y = null; }catch{ y = null; }
-      xs.push(x); ys.push(y);
-    }
+opSel.addEventListener('change', ()=> boundsWrap.classList.toggle('hidden', opSel.value!=='defint'));
 
-    const traces = [{
-      x: xs, y: ys, mode:'lines', name:`f(${v})`,
-      line:{color:'#8b5cf6', width:3},
-      hovertemplate: `${v}=%{x:.3f}<br>f=%{y:.3f}<extra></extra>`
-    }];
+document.querySelectorAll('.example').forEach(b=> b.addEventListener('click', ()=>{ exprInput.value=b.dataset.ex; compute() }));
 
-    if(op==='definite'){
-      const an = parseFloat(a), bn = parseFloat(b);
-      const xs2=[], ys2=[];
-      const M = 400;
-      for(let i=0;i<=M;i++){
-        const x = an + (bn-an)*i/M;
-        let y; try{ y = fn(x); if(!isFinite(y)) y=0; }catch{ y=0; }
-        xs2.push(x); ys2.push(y);
-      }
-      traces.push({
-        x: xs2, y: ys2, type:'scatter', mode:'none', fill:'tozeroy',
-        fillcolor:'rgba(34,211,238,0.22)', name:'Area', hoverinfo:'skip'
-      });
-      // bounds
-      const yMin = Math.min(...ys2.filter(n=>n!=null)), yMax = Math.max(...ys2.filter(n=>n!=null));
-      traces.push({ x:[an,an], y:[yMin,yMax], mode:'lines', line:{color:'#22d3ee', width:2, dash:'dash'}, hoverinfo:'skip', showlegend:false });
-      traces.push({ x:[bn,bn], y:[yMin,yMax], mode:'lines', line:{color:'#22d3ee', width:2, dash:'dash'}, hoverinfo:'skip', showlegend:false });
-    }
-
-    const layout = {
-      margin:{l:44, r:16, t:10, b:40},
-      paper_bgcolor:'rgba(0,0,0,0)',
-      plot_bgcolor:'rgba(11,18,32,0.7)',
-      font:{color:'#cbd5e1', family:'Plus Jakarta Sans, system-ui'},
-      xaxis:{gridcolor:'#1e293b', zerolinecolor:'#334155', tickcolor:'#475569', title:{text:v, font:{color:'#94a3b8'}}},
-      yaxis:{gridcolor:'#1e293b', zerolinecolor:'#334155', tickcolor:'#475569', title:{text:`f(${v})`, font:{color:'#94a3b8'}}},
-      showlegend:false,
-      hovermode:'x unified'
-    };
-    Plotly.react('graph', traces, layout, {displayModeBar:false, responsive:true});
-  }catch(e){
-    console.warn('Plot error', e);
-  }
-}
-
-function exportPDF(){
-  const el = document.getElementById('report');
-  const opt = {
-    margin: 0.4,
-    filename: 'calculus-lab-dark.pdf',
-    image: {type:'jpeg', quality:0.98},
-    html2canvas: { scale:2, backgroundColor:'#020617', useCORS:true },
-    jsPDF: { unit:'in', format:'letter', orientation:'portrait' }
-  };
+$('compute').addEventListener('click', compute);
+$('clear').addEventListener('click', ()=>{ exprInput.value='x^3 + 2*x'; varInput.value='x'; aInput.value='0'; bInput.value='2'; opSel.value='integrate'; boundsWrap.classList.add('hidden'); hideError(); compute() });
+$('export').addEventListener('click', ()=>{
+  const el = $('resultCard');
+  const opt = { margin:0.4, filename:'calculus-lab.pdf', image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2, backgroundColor:'#020617'}, jsPDF:{unit:'in',format:'letter',orientation:'portrait'} };
   html2pdf().set(opt).from(el).save();
+});
+
+exprInput.addEventListener('keydown', e=>{ if(e.key==='Enter') compute() });
+
+function doPlot(exprStr, v, op, dNode, a, b){
+  const f = safeBuild(exprStr, v);
+  const xa = op==='defint'? parseFloat(a) : -5;
+  const xb = op==='defint'? parseFloat(b) : 5;
+  const pad = op==='defint'? Math.max(0.5, Math.abs(xb-xa)*0.25) : 0;
+  const xmin = op==='defint'? Math.min(xa,xb)-pad : -5;
+  const xmax = op==='defint'? Math.max(xa,xb)+pad : 5;
+  const xs = linspace(xmin, xmax, 500);
+  const ys = xs.map(x=>f(x));
+
+  const traces=[{ x:xs, y:ys, mode:'lines', name:`f(${v})`, line:{color:'#8b5cf6', width:3}, hovertemplate:'x=%{x:.3f}<br>y=%{y:.3f}<extra></extra>' }];
+
+  if(op==='diff' && dNode){
+    const df = safeBuild(dNode.toString(), v);
+    traces.push({ x:xs, y:xs.map(x=>df(x)), mode:'lines', name:`f'(${v})`, line:{color:'#06b6d4', width:2, dash:'dot'} });
+  }
+  if(op==='defint'){
+    const lo=Math.min(xa,xb), hi=Math.max(xa,xb);
+    const xa2 = linspace(lo, hi, 300);
+    const ya2 = xa2.map(x=>f(x));
+    traces.push({ x:xa2, y:ya2, fill:'tozeroy', type:'scatter', mode:'none', name:'Area', fillcolor:'rgba(139,92,246,0.25)', hoverinfo:'skip' });
+  }
+
+  Plotly.newPlot(plotDiv, traces, {
+    paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+    margin:{l:42,r:12,t:10,b:38},
+    xaxis:{gridcolor:'#0f172a', zerolinecolor:'#334155', tickfont:{color:'#94a3b8', size:11}},
+    yaxis:{gridcolor:'#0f172a', zerolinecolor:'#334155', tickfont:{color:'#94a3b8', size:11}},
+    legend:{orientation:'h', y:-0.28, x:0, font:{color:'#cbd5e1', size:12}},
+    hovermode:'x unified'
+  }, {displayModeBar:false, responsive:true});
 }
 
-// Initialize: default operation = integral
-window.addEventListener('load', ()=>{
-  opSelect.value = 'integrate';
-  toggleBounds();
-  calculate();
+async function compute(){
+  hideError(); output.innerHTML='';
+  const op = opSel.value;
+  const exprRaw = exprInput.value.trim();
+  const v = (varInput.value.trim()||'x');
+  const a = aInput.value.trim();
+  const b = bInput.value.trim();
+
+  if(!exprRaw){ showError('Enter an expression.'); return; }
+
+  let parsed;
+  try{ parsed = nerdamer(exprRaw); } catch(e){ showError('Could not compute. Check syntax.'); output.innerHTML=`<div class="text-slate-500 text-sm">Example: <code>x^3 + 2*x</code>, <code>sin(x)</code>, <code>exp(x)</code></div>`; Plotly.purge(plotDiv); return; }
+
+  try{
+    if(op==='diff'){
+      // DERIVATIVE - stable
+      let d;
+      try { d = nerdamer(`diff(${exprRaw}, ${v})`); }
+      catch(e){ throw new Error('diff failed') }
+
+      const tex = `\\frac{d}{d ${v}}\\left( ${safeTex(parsed)} \\right) = ${safeTex(d)}`;
+      output.innerHTML = `
+        <div class="space-y-3">
+          <div class="text-slate-400 text-xs">Derivative</div>
+          <div class="text-2xl">${renderMath(tex)}</div>
+          <div class="text-sm text-slate-400">Simplified: <span class="text-slate-200 font-mono">${d.toString()}</span></div>
+        </div>`;
+      doPlot(exprRaw, v, 'diff', d);
+      return;
+    }
+
+    if(op==='integrate'){
+      // INDEFINITE - stable
+      let F;
+      try { F = nerdamer(`integrate(${exprRaw}, ${v})`); }
+      catch(e){ throw new Error('integrate failed') }
+
+      const tex = `\\int ${safeTex(parsed)}\\, d${v} = ${safeTex(F)} + C`;
+      output.innerHTML = `
+        <div class="space-y-3">
+          <div class="text-slate-400 text-xs">Indefinite Integral</div>
+          <div class="text-2xl">${renderMath(tex)}</div>
+          <div class="text-sm text-slate-500">Constant of integration C included.</div>
+        </div>`;
+      doPlot(exprRaw, v, 'integrate');
+      return;
+    }
+
+    if(op==='defint'){
+      // DEFINITE - use F.sub, fallback to Simpson
+      let F=null, method='exact', res, Fa, Fb, numericVal=null;
+      try { F = nerdamer(`integrate(${exprRaw}, ${v})`); } catch(e){ F=null }
+
+      if(F){
+        try{
+          Fa = F.sub(v, a);   // USE .sub not evaluate
+          Fb = F.sub(v, b);
+          res = Fb.subtract(Fa);
+        }catch(e){
+          method='numeric';
+        }
+      } else { method='numeric' }
+
+      if(method==='numeric'){
+        const f = safeBuild(exprRaw, v);
+        const an = parseFloat(a), bn = parseFloat(b);
+        if(!isFinite(an) || !isFinite(bn)) throw new Error('bad bounds');
+        numericVal = simpson(f, an, bn);
+        res = nerdamer(numericVal.toFixed(10));
+      }
+
+      const texInt = `\\int_{${a}}^{${b}} ${safeTex(parsed)}\\, d${v}`;
+      if(method==='exact'){
+        const Ffn = safeBuild(F.toString(), v);
+        let dec='';
+        try{ const dv = Ffn(parseFloat(b)) - Ffn(parseFloat(a)); if(isFinite(dv)) dec = dv.toFixed(6); }catch{}
+        const texSteps = `\\left[ ${safeTex(F)} \\right]_{${a}}^{${b}} = ${safeTex(Fb)} - \\left(${safeTex(Fa)}\\right) = ${safeTex(res)}`;
+        output.innerHTML = `
+          <div class="space-y-3">
+            <div class="text-slate-400 text-xs">Definite Integral (Exact)</div>
+            <div class="text-xl">${renderMath(texInt + ' = ' + texSteps)}</div>
+            ${dec? `<div class="text-cyan-300 font-mono">≈ ${dec}</div>`:''}
+            <div class="text-xs text-slate-500">Computed via FTC using .sub()</div>
+          </div>`;
+      } else {
+        output.innerHTML = `
+          <div class="space-y-3">
+            <div class="text-slate-400 text-xs">Definite Integral (Numeric)</div>
+            <div class="text-xl">${renderMath(texInt + ` \\approx ${numericVal.toFixed(6)}`)}</div>
+            <div class="text-xs text-amber-300/90">Symbolic antiderivative not found or .sub() failed — used Simpson's rule.</div>
+          </div>`;
+      }
+      doPlot(exprRaw, v, 'defint', null, a, b);
+      return;
+    }
+
+  }catch(err){
+    console.error(err);
+    showError('Could not compute. Check syntax.');
+    output.innerHTML = `<div class="text-slate-500 text-sm">Try: <code>x^3 + 2*x</code>, <code>sin(x)/x</code>, <code>exp(-x^2)</code></div>`;
+    Plotly.purge(plotDiv);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  boundsWrap.classList.add('hidden');
+  compute();
 });
+window.addEventListener('resize', ()=>{ try{ Plotly.Plots.resize(plotDiv) }catch{} });
 </script>
 <script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
 </body>
